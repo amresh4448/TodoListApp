@@ -3,31 +3,26 @@
 import 'dart:convert';
 
 import 'package:todo_list_app/domain/entities/activity.dart';
-import 'package:todo_list_app/domain/entities/festival.dart';
 import 'package:todo_list_app/domain/entities/place.dart';
 
 class Emotion {
   final String img;
   final Place? place;
-  final Festival? festival;
   final Activity? activity; 
   Emotion(
     this.img,
     this.place,
-    this.festival,
     this.activity,
   );
 
   Emotion copyWith({
     String? img,
     Place? place,
-    Festival? festival,
     Activity? activity,
   }) {
     return Emotion(
       img ?? this.img,
       place ?? this.place,
-      festival ?? this.festival,
       activity ?? this.activity,
     );
   }
@@ -36,7 +31,6 @@ class Emotion {
     return <String, dynamic>{
       'img': img,
       'place': place?.toMap(),
-      'festival': festival?.toMap(),
       'activity': activity?.toMap(),
     };
   }
@@ -45,7 +39,6 @@ class Emotion {
     return Emotion(
       map['img'] as String,
       map['place'] != null ? Place.fromMap(map['place'] as Map<String,dynamic>) : null,
-      map['festival'] != null ? Festival.fromMap(map['festival'] as Map<String,dynamic>) : null,
       map['activity'] != null ? Activity.fromMap(map['activity'] as Map<String,dynamic>) : null,
     );
   }
@@ -56,7 +49,7 @@ class Emotion {
 
   @override
   String toString() {
-    return 'Emotion(img: $img, place: $place, festival: $festival, activity: $activity)';
+    return 'Emotion(img: $img, place: $place,  activity: $activity)';
   }
 
   @override
@@ -66,7 +59,6 @@ class Emotion {
     return 
       other.img == img &&
       other.place == place &&
-      other.festival == festival &&
       other.activity == activity;
   }
 
@@ -74,7 +66,6 @@ class Emotion {
   int get hashCode {
     return img.hashCode ^
       place.hashCode ^
-      festival.hashCode ^
       activity.hashCode;
   }
 }

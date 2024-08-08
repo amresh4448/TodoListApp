@@ -1,21 +1,15 @@
 
 
 import 'package:dio/dio.dart';
-import 'package:todo_list_app/app/app_constants.dart';
 import 'package:todo_list_app/data/data_source/remote_data_source.dart';
 import 'package:todo_list_app/data/mappers/mapper.dart';
 import 'package:todo_list_app/data/network/error_handler.dart';
 import 'package:todo_list_app/data/network/network_info.dart';
-import 'package:todo_list_app/data/responses/responses.dart';
 import 'package:todo_list_app/domain/entities/authentication.dart';
 import 'package:todo_list_app/data/requests/requests.dart';
 import 'package:todo_list_app/data/network/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:todo_list_app/domain/entities/booking.dart';
-import 'package:todo_list_app/domain/entities/festival.dart';
 import 'package:todo_list_app/domain/entities/home_data.dart';
-import 'package:todo_list_app/domain/entities/place.dart';
-import 'package:todo_list_app/domain/entities/user.dart';
 import 'package:todo_list_app/domain/repository/repository.dart';
 
 class RepositoryImplementation extends Repository {
@@ -180,233 +174,6 @@ class RepositoryImplementation extends Repository {
 
 
   @override
-  Future<Either<Failure, String>> addFavoriteFestival(String client_id, String festival_id) async {
-    if(await _networkInfo.isConnected) {
-      try {
-        final response = await _remoteDataSource.addFavoriteFestival(client_id, festival_id);
-        if(response.status == ResponseCode.SUCCESS) {
-          //Return Response as Entity
-          return Right(response.message!);
-        }
-        else {
-          return Left(Failure( response.status ?? ResponseCode.DEFAULT, response.message?? ResponseMessage.DEFAULT ));
-        }
-      } catch (error) {
-        print(error.toString());
-        if(error is DioError && error.response != null){
-          var dioError = error;
-          return Left(Failure(dioError.response!.statusCode!, dioError.response!.data["message"]));
-        }
-        else {
-          return Left(ErrorHandler.handle(error).failure);
-        }
-      }
-    }
-    else {
-      return Left(Failure(502, "Please check your internet connection"));
-    }
-  }
-
-
-  @override
-  Future<Either<Failure, String>> addFavoritePlace(String client_id, String place_id) async {
-    if(await _networkInfo.isConnected) {
-      try {
-        final response = await _remoteDataSource.addFavoritePlace(client_id, place_id);
-        if(response.status == ResponseCode.SUCCESS) {
-          //Return Response as Entity
-          return Right(response.message!);
-        }
-        else {
-          return Left(Failure( response.status ?? ResponseCode.DEFAULT, response.message?? ResponseMessage.DEFAULT ));
-        }
-      } catch (error) {
-        print(error.toString());
-        if(error is DioError && error.response != null){
-          var dioError = error;
-          return Left(Failure(dioError.response!.statusCode!, dioError.response!.data["message"]));
-        }
-        else {
-          return Left(ErrorHandler.handle(error).failure);
-        }
-      }
-    }
-    else {
-      return Left(Failure(502, "Please check your internet connection"));
-    }
-  }
-
-
-
-  @override
-  Future<Either<Failure, String>> removeFavoriteFestival(String client_id, String festival_id) async {
-    if(await _networkInfo.isConnected) {
-      try {
-        final response = await _remoteDataSource.removeFavoriteFestival(client_id, festival_id);
-        if(response.status == ResponseCode.SUCCESS) {
-          //Return Response as Entity
-          return Right(response.message!);
-        }
-        else {
-          return Left(Failure( response.status ?? ResponseCode.DEFAULT, response.message?? ResponseMessage.DEFAULT ));
-        }
-      } catch (error) {
-        print(error.toString());
-        if(error is DioError && error.response != null){
-          var dioError = error;
-          return Left(Failure(dioError.response!.statusCode!, dioError.response!.data["message"]));
-        }
-        else {
-          return Left(ErrorHandler.handle(error).failure);
-        }
-      }
-    }
-    else {
-      return Left(Failure(502, "Please check your internet connection"));
-    }
-  }
-
-  @override
-  Future<Either<Failure, String>> removeFavoritePlace(String client_id, String place_id) async {
-    if(await _networkInfo.isConnected) {
-      try {
-        final response = await _remoteDataSource.removeFavoriteFestival(client_id, place_id);
-        if(response.status == ResponseCode.SUCCESS) {
-          //Return Response as Entity
-          return Right(response.message!);
-        }
-        else {
-          return Left(Failure( response.status ?? ResponseCode.DEFAULT, response.message?? ResponseMessage.DEFAULT ));
-        }
-      } catch (error) {
-        print(error.toString());
-        if(error is DioError && error.response != null){
-          var dioError = error;
-          return Left(Failure(dioError.response!.statusCode!, dioError.response!.data["message"]));
-        }
-        else {
-          return Left(ErrorHandler.handle(error).failure);
-        }
-      }
-    }
-    else {
-      return Left(Failure(502, "Please check your internet connection"));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Festival>>> getUserFestivals(String id) async {
-    if(await _networkInfo.isConnected) {
-      try {
-        final response = await _remoteDataSource.getUserFestivals(id);
-        if(response.status == ResponseCode.SUCCESS) {
-          //Return Response as Entity
-          return Right(response.toDomain());
-        }
-        else {
-          return Left(Failure( response.status ?? ResponseCode.DEFAULT, response.message?? ResponseMessage.DEFAULT ));
-        }
-      } catch (error) {
-        print(error.toString());
-        if(error is DioError && error.response != null){
-          var dioError = error;
-          return Left(Failure(dioError.response!.statusCode!, dioError.response!.data["message"]));
-        }
-        else {
-          return Left(ErrorHandler.handle(error).failure);
-        }
-      }
-    }
-    else {
-      return Left(Failure(502, "Please check your internet connection"));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Place>>> getUserPlaces(String id) async {
-    if(await _networkInfo.isConnected) {
-      try {
-        final response = await _remoteDataSource.getUserPlaces(id);
-        if(response.status == ResponseCode.SUCCESS) {
-          //Return Response as Entity
-          return Right(response.toDomain());
-        }
-        else {
-          return Left(Failure( response.status ?? ResponseCode.DEFAULT, response.message?? ResponseMessage.DEFAULT ));
-        }
-      } catch (error) {
-        print(error.toString());
-        if(error is DioError && error.response != null){
-          var dioError = error;
-          return Left(Failure(dioError.response!.statusCode!, dioError.response!.data["message"]));
-        }
-        else {
-          return Left(ErrorHandler.handle(error).failure);
-        }
-      }
-    }
-    else {
-      return Left(Failure(502, "Please check your internet connection"));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Booking>>> getUserBooking(String id) async {
-    if(await _networkInfo.isConnected) {
-      try {
-        final response = await _remoteDataSource.getUserBooking(id);
-        if(response.status == ResponseCode.SUCCESS) {
-          //Return Response as Entity
-          return Right(response.toDomain());
-        }
-        else {
-          return Left(Failure( response.status ?? ResponseCode.DEFAULT, response.message?? ResponseMessage.DEFAULT ));
-        }
-      } catch (error) {
-        print(error.toString());
-        if(error is DioError && error.response != null) {
-          var dioError = error;
-          return Left(Failure(dioError.response!.statusCode!, dioError.response!.data["message"]));
-        }
-        else {
-          return Left(ErrorHandler.handle(error).failure);
-        }
-      }
-    }
-    else {
-      return Left(Failure(502, "Please check your internet connection"));
-    }
-  }
-
-  @override
-  Future<Either<Failure, String>> placeBooking(BookingRequest input) async {
-    if(await _networkInfo.isConnected) {
-      try {
-        final response = await _remoteDataSource.placeBooking(input);
-        if(response.status == ResponseCode.SUCCESS) {
-          //Return Response as Entity
-          return Right(response.message!);
-        }
-        else {
-          return Left(Failure( response.status ?? ResponseCode.DEFAULT, response.message?? ResponseMessage.DEFAULT ));
-        }
-      } catch (error) {
-        print(error.toString());
-        if(error is DioError && error.response != null) {
-          var dioError = error;
-          return Left(Failure(dioError.response!.statusCode!, dioError.response!.data["message"]));
-        }
-        else {
-          return Left(ErrorHandler.handle(error).failure);
-        }
-      }
-    }
-    else {
-      return Left(Failure(502, "Please check your internet connection"));
-    }
-  }
-  
-  @override
   Future<Either<Failure, int>> logout() async {
     if(await _networkInfo.isConnected) {
       try {
@@ -490,5 +257,13 @@ class RepositoryImplementation extends Repository {
       return Left(Failure(502, "Please check your internet connection"));
     }
   }
+
+
+
+
+
+
+
+
 
 }

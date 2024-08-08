@@ -8,13 +8,14 @@ class Routes {
   static const String loginRoute = "/login";
   static const String registerRoute = "/register";
   static const String homeRoute = "/home";
-  static const String placesRoute = "/places";
-  static const String festivalsRoute = "/festivals";
-  static const String emotionsRoute = "/emotions";
-  static const String profileRoute = "/profile";
-  static const String checkoutRoute = "/checkout";
-  static const String favoritesRoute = "/favorites";
-  static const String historyRoute = "/history";
+    static const String profileRoute = "/profile";
+
+  // static const String placesRoute = "/places";
+  // static const String festivalsRoute = "/festivals";
+  // static const String emotionsRoute = "/emotions";
+  // static const String checkoutRoute = "/checkout";
+  // static const String favoritesRoute = "/favorites";
+  // static const String historyRoute = "/history";
 }
 
 
@@ -36,26 +37,26 @@ class RouteGenerator {
       case (Routes.homeRoute):
         return getPageSlashPageTransition(routeSettings);
 
-      case (Routes.placesRoute):
-        return MaterialPageRoute(builder: ((context) => PlaceView(place: routeSettings.arguments)));
+      // case (Routes.placesRoute):
+      //   return MaterialPageRoute(builder: ((context) => PlaceView(place: routeSettings.arguments)));
       
-      case (Routes.festivalsRoute):
-        return MaterialPageRoute(builder: ((context) => FestivalView(festival: routeSettings.arguments)));
+      // case (Routes.festivalsRoute):
+      //   return MaterialPageRoute(builder: ((context) => FestivalView(festival: routeSettings.arguments)));
 
-      case (Routes.emotionsRoute):
-        return MaterialPageRoute(builder: ((context) => EmotionView(emotion: routeSettings.arguments)));
+      // case (Routes.emotionsRoute):
+      //   return MaterialPageRoute(builder: ((context) => EmotionView(emotion: routeSettings.arguments)));
       
-      case (Routes.profileRoute):
-        return MaterialPageRoute(builder: ((context) => ProfileView(user: routeSettings.arguments)));
+      // case (Routes.profileRoute):
+      //   return MaterialPageRoute(builder: ((context) => ProfileView(user: routeSettings.arguments)));
 
-      case (Routes.favoritesRoute):
-        return MaterialPageRoute(builder: ((context) => FavoritesView(user: routeSettings.arguments)));
+      // case (Routes.favoritesRoute):
+      //   return MaterialPageRoute(builder: ((context) => FavoritesView(user: routeSettings.arguments)));
 
-      case (Routes.historyRoute):
-        return MaterialPageRoute(builder: ((context) => HistoryView(user: routeSettings.arguments)));
+      // case (Routes.historyRoute):
+      //   return MaterialPageRoute(builder: ((context) => HistoryView(user: routeSettings.arguments)));
       
-      case (Routes.checkoutRoute):
-        return MaterialPageRoute(builder: ((context) => CheckoutView(user: routeSettings.arguments)));
+      // case (Routes.checkoutRoute):
+      //   return MaterialPageRoute(builder: ((context) => CheckoutView(user: routeSettings.arguments)));
       
       default:
         return unDefinedRoute();
@@ -114,11 +115,6 @@ class RouteGenerator {
       case (Routes.splashRoute):
         return SplashView();
 
-      // case (Routes.loginRoute):
-      //   return LoginView();
-      
-      // case (Routes.registerRoute):
-      //   return RegisterView();
 
       case (Routes.onBoardingRoute):
         return OnboardingView();
@@ -126,26 +122,26 @@ class RouteGenerator {
       case (Routes.homeRoute):
         return HomeView();
 
-      case (Routes.placesRoute):
-        return PlaceView(place: routeSettings.arguments);
+      // case (Routes.placesRoute):
+      //   return PlaceView(place: routeSettings.arguments);
       
-      case (Routes.festivalsRoute):
-        return FestivalView(festival: routeSettings.arguments,);
+      // case (Routes.festivalsRoute):
+      //   return FestivalView(festival: routeSettings.arguments,);
 
-      case (Routes.emotionsRoute):
-        return EmotionView(emotion: routeSettings.arguments,);
+      // case (Routes.emotionsRoute):
+      //   return EmotionView(emotion: routeSettings.arguments,);
       
-      case (Routes.profileRoute):
-        return ProfileView(user: routeSettings.arguments);
+      // case (Routes.profileRoute):
+      //   return ProfileView(user: routeSettings.arguments);
 
-      case (Routes.favoritesRoute):
-        return FavoritesView(user: routeSettings.arguments);
+      // case (Routes.favoritesRoute):
+      //   return FavoritesView(user: routeSettings.arguments);
 
-      case (Routes.historyRoute):
-        return HistoryView(user: routeSettings.arguments);
+      // case (Routes.historyRoute):
+      //   return HistoryView(user: routeSettings.arguments);
       
-      case (Routes.checkoutRoute):
-        return CheckoutView(user: routeSettings.arguments);
+      // case (Routes.checkoutRoute):
+      //   return CheckoutView(user: routeSettings.arguments);
       
       default:
         return Scaffold(

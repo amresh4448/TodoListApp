@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_list_app/domain/entities/user.dart';
-import '../domain/entities/booking.dart';
 
 const String PREF_KEY_ONBOARDING_STATUS = "PREF_KEY_ONBOARDING_STATUS";
 const String PREF_KEY_LOGIN_STATUS = "PREF_KEY_LOGIN_STATUS";
@@ -57,17 +56,8 @@ class AppPreferences {
     }
   }
 
-  Future<void> setBooking(Booking? booking) async {
-    booking == null?
-    _sharedPreferences.remove(PREF_KEY_BOOKING):
-    _sharedPreferences.setString(PREF_KEY_BOOKING, booking.toJson());
-  }
 
-  Future<Booking?> getBooking() async {
-    String? bookingJson = _sharedPreferences.getString(PREF_KEY_BOOKING);
-    print(bookingJson);
-    return bookingJson!=null? Booking.fromJson(bookingJson): null;
-  }
+
 
 
 

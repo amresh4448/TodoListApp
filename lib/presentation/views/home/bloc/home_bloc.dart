@@ -4,9 +4,7 @@ import 'package:meta/meta.dart';
 
 import 'package:todo_list_app/app/app_pref.dart';
 import 'package:todo_list_app/domain/entities/activity.dart';
-import 'package:todo_list_app/domain/entities/booking.dart';
 import 'package:todo_list_app/domain/entities/emotion.dart';
-import 'package:todo_list_app/domain/entities/festival.dart';
 import 'package:todo_list_app/domain/entities/place.dart';
 import 'package:todo_list_app/domain/usecases/home_data_usecase.dart';
 import 'package:todo_list_app/domain/usecases/auth/logout_usecase.dart';
@@ -44,7 +42,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         }, 
         (entity) {
           //Store token
-          emit(HomeLoaded(entity.places, entity.festivals, entity.emotions, entity.activities));
+          emit(HomeLoaded(entity.places,  entity.emotions, entity.activities));
         }
       );
     } catch (e) {

@@ -2,9 +2,7 @@ import 'package:todo_list_app/data/mappers/extensions.dart';
 import 'package:todo_list_app/data/responses/responses.dart';
 import 'package:todo_list_app/domain/entities/activity.dart';
 import 'package:todo_list_app/domain/entities/authentication.dart';
-import 'package:todo_list_app/domain/entities/booking.dart';
 import 'package:todo_list_app/domain/entities/emotion.dart';
-import 'package:todo_list_app/domain/entities/festival.dart';
 import 'package:todo_list_app/domain/entities/home_data.dart';
 import 'package:todo_list_app/domain/entities/location.dart';
 import 'package:todo_list_app/domain/entities/place.dart';
@@ -41,7 +39,6 @@ extension HomeDataResponseMapper on HomeDataResponse? {
   HomeDataObject toDomain() {
     return HomeDataObject(
       this?.places?.map((place) => place.toDomain()).toList() ?? <Place>[],
-      this?.festivals?.map((festival) => festival.toDomain()).toList() ?? <Festival>[],
       this?.emotions?.map((emotion) => emotion.toDomain()).toList() ?? <Emotion>[],
       this?.activities?.map((activity) => activity.toDomain()).toList() ?? <Activity>[],
     );
@@ -64,26 +61,12 @@ extension PlaceResponseMapper on PlaceResponse? {
   }
 }
 
-extension FestivalResponseMapper on FestivalResponse? {
-  Festival toDomain() {
-    return Festival(
-      this?.id?.orZero() ?? ZERO,
-      this?.name?.orEmpty() ?? EMPTY,
-      this?.img?.orEmpty() ?? EMPTY,
-      this?.description?.orEmpty() ?? EMPTY,
-      this?.location != null? this!.location.toDomain(): DEFAULT_LOCATION,
-      this?.people?.orZero() ?? ZERO,
-      this?.activities?.map((activity) => activity.toDomain()).toList() ?? <Activity>[],
-    );
-  }
-}
 
 extension EmotionResponseMapper on EmotionResponse? {
   Emotion toDomain() {
     return Emotion(
       this?.img?.orEmpty() ?? EMPTY,
       this?.place?.toDomain(),
-      this?.festival?.toDomain(),
       this?.activity?.toDomain(),
     );
   }
@@ -108,11 +91,6 @@ extension ActivityResponseMapper on ActivityResponse? {
   }
 }
 
-extension UserFestivalResponseMapper on UserFestivalResponse? {
-  List<Festival> toDomain() {
-    return this?.festivals?.map((festival) => festival.toDomain()).toList() ?? <Festival>[];
-  }
-}
 
 extension UserPlaceResponseMapper on UserPlaceResponse? {
   List<Place> toDomain() {
@@ -120,19 +98,5 @@ extension UserPlaceResponseMapper on UserPlaceResponse? {
   }
 }
 
-extension BookingsResponseMapper on BookingsResponse? {
-  List<Booking> toDomain() {
-    return this?.bookings?.map((booking) => booking.toDomain()).toList() ?? <Booking>[];
-  }
-}
 
-extension BookingResponseMapper on BookingResponse? {
-  Booking toDomain() {
-    return Booking(
-      this?.id?.orZero() ?? ZERO,
-      this?.places?.map((place) => place.toDomain()).toList() ?? <Place>[],
-      this?.festivals?.map((festival) => festival.toDomain()).toList() ?? <Festival>[],
-      this?.activities?.map((activity) => activity.toDomain()).toList() ?? <Activity>[],
-    );
-  }
-}
+

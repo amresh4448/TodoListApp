@@ -2,8 +2,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:todo_list_app/domain/entities/activity.dart';
-import 'package:todo_list_app/domain/entities/festival.dart';
-import 'package:todo_list_app/domain/entities/place.dart';
 
 part 'requests.g.dart';
 

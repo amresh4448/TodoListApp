@@ -8,13 +8,11 @@ class HomeInitial extends HomeState {}
 
 class HomeLoaded extends HomeState {
   List<Place> places;
-  List<Festival> festivals;
   List<Emotion> emotions;
   List<Activity> activities;
   
   HomeLoaded(
     this.places,
-    this.festivals,
     this.emotions,
     this.activities,
   );
@@ -33,22 +31,5 @@ class HomeError extends HomeState {
 
 class BookingLoading extends HomeState {}
 
-class AddedToBooking extends HomeState {
-  Booking booking;
-  AddedToBooking(
-    this.booking,
-  );
 
-  @override 
-  List<Object> get props => [booking];
-}
 
-class RemovedFromBooking extends HomeState {
-  Booking booking;
-  RemovedFromBooking(
-    this.booking,
-  );
-
-  @override 
-  List<Object> get props => [booking];
-}

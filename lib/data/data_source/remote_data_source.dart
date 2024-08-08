@@ -1,7 +1,5 @@
 import 'package:todo_list_app/data/requests/requests.dart';
-
 import 'package:todo_list_app/data/network/api_client.dart';
-import 'package:todo_list_app/data/requests/requests.dart';
 import 'package:todo_list_app/data/responses/responses.dart';
 
 abstract class RemoteDataSource {
@@ -15,18 +13,6 @@ abstract class RemoteDataSource {
   Future<HomeDataResponse> getHomeData();
   Future<BaseResponse> updateProfile(UpdateProfileRequest request);
   Future<BaseResponse> updatePassword(UpdateProfileRequest request);
-
-  Future<UserFestivalResponse> getUserFestivals(String id);
-  Future<UserPlaceResponse> getUserPlaces(String id);
-
-  Future<BaseResponse> addFavoritePlace(String client_id, String place_id);
-  Future<BaseResponse> removeFavoritePlace(String client_id, String place_id);
-  Future<BaseResponse> addFavoriteFestival(String client_id, String festival_id);
-  Future<BaseResponse> removeFavoriteFestival(String client_id, String festival_id);
-  
-  Future<BookingsResponse> getUserBooking(String id);
-  Future<BaseResponse> placeBooking(BookingRequest input);
-  
 }
 
 class RemoteDataSourceImplementation implements RemoteDataSource {
@@ -38,61 +24,15 @@ class RemoteDataSourceImplementation implements RemoteDataSource {
     return await _appServiceClient.login(loginRequest.email, loginRequest.password, loginRequest.device_name);
   }
   
-  @override
-  Future<HomeDataResponse> getHomeData() async {
-    return await _appServiceClient.getHomeData();
-  }
   
   @override
   Future<BaseResponse> updatePassword(UpdateProfileRequest request) async {
     return await _appServiceClient.updatePassword(request.email!, request.password!, request.new_password!);
   }
   
-  @override
-  Future<BaseResponse> updateProfile(UpdateProfileRequest request) async {
-    return await _appServiceClient.updateProfile(request.user_id!, request.first_name!, request.last_name!, request.email!, request.phone!);
-  }
-  
-  @override
-  Future<BaseResponse> addFavoriteFestival(String client_id, String festival_id) async {
-    return await _appServiceClient.addUserFestival(client_id, festival_id);
-  }
-  
-  @override
-  Future<BaseResponse> addFavoritePlace(String client_id, String place_id) async {
-    return await _appServiceClient.addUserPlace(client_id, place_id);
-  }
-  
-  @override
-  Future<UserFestivalResponse> getUserFestivals(String id) async {
-    return await _appServiceClient.getUserFestivals(id);
-  }
-  
-  @override
-  Future<UserPlaceResponse> getUserPlaces(String id) async {
-    return await _appServiceClient.getUserPlaces(id);
-  }
 
-  @override
-  Future<BookingsResponse> getUserBooking(String id) async {
-    return await _appServiceClient.getUserBookings(id);
-  }
   
-  @override
-  Future<BaseResponse> placeBooking(BookingRequest input) async {
-    return await _appServiceClient.placeBooking(input.client_id, input.places, input.festivals, input.activities);
-  }
-  
-  @override
-  Future<BaseResponse> removeFavoriteFestival(String client_id, String festival_id) async {
-    return await _appServiceClient.removeUserFestival(client_id, festival_id);
-  }
-  
-  @override
-  Future<BaseResponse> removeFavoritePlace(String client_id, String place_id) async {
-    return await _appServiceClient.removeUserPlace(client_id, place_id);
-  }
-  
+ 
   @override
   Future<AuthResponse> register(RegisterRequest registerRquest) async {
     return await _appServiceClient.register(
@@ -128,6 +68,27 @@ class RemoteDataSourceImplementation implements RemoteDataSource {
       registerRquest.email, 
       registerRquest.sub
     );
+  }
+
+    Future<AuthResponse> getTask(GoogleRegisterRequest registerRquest) async {
+    return await _appServiceClient.googleLogin(
+      registerRquest.first_name, 
+      registerRquest.last_name, 
+      registerRquest.email, 
+      registerRquest.sub
+    );
+  }
+  
+  @override
+  Future<HomeDataResponse> getHomeData() {
+    // TODO: implement getHomeData
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<BaseResponse> updateProfile(UpdateProfileRequest request) {
+    // TODO: implement updateProfile
+    throw UnimplementedError();
   }
 
   

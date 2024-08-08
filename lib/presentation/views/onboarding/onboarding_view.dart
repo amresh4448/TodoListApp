@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list_app/presentation/resources/color_manager.dart';
 import 'package:todo_list_app/presentation/resources/routes_manager.dart';
 import 'package:todo_list_app/presentation/resources/styles_manager.dart';
@@ -9,39 +7,39 @@ import 'package:todo_list_app/presentation/resources/values_manager.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({Key? key}) : super(key: key);
-
   @override
   State<OnboardingView> createState() => _OnboardingViewState();
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
-  List images = ['welcome-one.png', 'welcome-two.png', 'welcome-three.png'];
-  List titles = ['Tours', 'Trips', 'Travels'];
-  List subtitles = ['Parks', 'Mountains', 'Lakes'];
+  List images = ['todoimg_1.jpg', 'todoimg2.jpg', 'todo_3.jpg'];
+  List titles = ['Your Ultimate', 'Todo', 'List'];
+  List subtitles = ['Welcome', 'to Your Ultimate', 'Ultimate To-Do List App!'];
+
   List descriptions = [
-    "Activities like sightseeing, walking tours, hinking, canoeing create the perfect bonding experience",
-    "Adventurous? lets hike up a hill, visit amusment parks, national parks, animal reserves",
-    "A photographer's haven. Enjoy authentic scenery "
-  ];
+"Stay organized and achieve your goals with ease." 
+"Our app helps you manage tasks", "set priorities, and track your progress effortlessly.",
+"Whether it's daily errands or long-term projects, streamline your schedule and boost productivity.",
+"Get started and take control of your to-do list today!"
+];
   int _currentPage = 0;
   late Timer _timer;
-  PageController _pageController = PageController(
+  final PageController _pageController = PageController(
     initialPage: 0,
   );
-
+  
   @override
 void initState() {
   super.initState();
-  _timer = Timer.periodic(Duration(seconds: 4), (Timer timer) {
+  _timer = Timer.periodic(const Duration(seconds: 4), (Timer timer) {
     if (_currentPage < 2) {
       _currentPage++;
     } else {
       _currentPage = 0;
     }
-
     _pageController.animateToPage(
       _currentPage,
-      duration: Duration(milliseconds: 350),
+      duration: const Duration(milliseconds: 350),
       curve: Curves.easeIn,
     );
   });
@@ -86,7 +84,7 @@ void initState() {
                               child: AppText(
                                 text:
                                     descriptions[index],
-                                color: ColorManager.textColor2,
+                                color: ColorManager.bigTextColor,
                                 size: 14,
                               ),
                             ),
@@ -95,7 +93,7 @@ void initState() {
                               onTap: () {
                                 Navigator.pushReplacementNamed(context, Routes.homeRoute);
                               },
-                              child: Container(
+                              child: SizedBox(
                                 width: 200,
                                 child: Row (
                                   children : [ 
